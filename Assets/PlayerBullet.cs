@@ -36,7 +36,9 @@ public class PlayerBullet : MonoBehaviour
             GameObject Gun = Enemy.transform.Find("Gun").gameObject;
             EnemyGun script = Gun.GetComponent<EnemyGun>();
             script.AimToPlayer();
-            //gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
+
+            gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
+       
         }
     }
 }

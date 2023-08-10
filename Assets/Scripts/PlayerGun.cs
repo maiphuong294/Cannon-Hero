@@ -42,18 +42,10 @@ public class PlayerGun : MonoBehaviour
             forceDirection.x = (float)Math.Cos(transform.rotation.eulerAngles.z * 0.0174532925);
             forceDirection.y = (float)Math.Sin(transform.rotation.eulerAngles.z * 0.0174532925);
             isOnPress = false;
-            //GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.Euler(forceDirection));
+        
             GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.Euler(transform.localEulerAngles));
 
             bullet.GetComponent<Rigidbody2D>().AddForce(forceDirection * forceAmount, ForceMode2D.Impulse);
-
-            Debug.Log("Hit the ground");
-            GameObject Enemy = GameObject.Find("Enemy");
-            GameObject Gun = Enemy.transform.Find("Gun").gameObject;
-            EnemyGun script = Gun.GetComponent<EnemyGun>();
-            script.AimToPlayer();
-
-
 
         }
     }
