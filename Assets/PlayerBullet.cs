@@ -23,5 +23,21 @@ public class PlayerBullet : MonoBehaviour
         Quaternion targetRotation = Quaternion.LookRotation(direction, transform.up);
         rb.MoveRotation(targetRotation);
     }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy") == true){
+            Debug.Log("HIT");
+        }
+        if(collision.gameObject.CompareTag("Ground") == true)
+        {
+            Debug.Log("Hit the ground");
+            GameObject Enemy = GameObject.Find("Enemy");
+            GameObject Gun = Enemy.transform.Find("Gun").gameObject;
+            EnemyGun script = Gun.GetComponent<EnemyGun>();
+            script.AimToPlayer();
+            //gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
+        }
+    }
 }
 

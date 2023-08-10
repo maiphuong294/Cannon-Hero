@@ -46,6 +46,15 @@ public class PlayerGun : MonoBehaviour
             GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.Euler(transform.localEulerAngles));
 
             bullet.GetComponent<Rigidbody2D>().AddForce(forceDirection * forceAmount, ForceMode2D.Impulse);
+
+            Debug.Log("Hit the ground");
+            GameObject Enemy = GameObject.Find("Enemy");
+            GameObject Gun = Enemy.transform.Find("Gun").gameObject;
+            EnemyGun script = Gun.GetComponent<EnemyGun>();
+            script.AimToPlayer();
+
+
+
         }
     }
 }
