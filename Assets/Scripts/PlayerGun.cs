@@ -17,7 +17,7 @@ public class PlayerGun : MonoBehaviour
     void Start()
     {
         isOnPress = false;
-        rotationSpeed = 15f;
+        rotationSpeed = 30f;
         forceAmount = 10f;
         forceDirection = Vector3.up;
         rb = GetComponent<Rigidbody2D>();
@@ -31,7 +31,7 @@ public class PlayerGun : MonoBehaviour
         {
             isOnPress=true;          
         }
-        if(isOnPress == true)
+        if (isOnPress == true && transform.rotation.eulerAngles.z < 90f) 
         {
             //transform.Rotate(1.0f, 0.0f, 0.0f, Space.Self);
             transform.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
@@ -42,8 +42,9 @@ public class PlayerGun : MonoBehaviour
             forceDirection.x = (float)Math.Cos(transform.rotation.eulerAngles.z * 0.0174532925);
             forceDirection.y = (float)Math.Sin(transform.rotation.eulerAngles.z * 0.0174532925);
             isOnPress = false;
-        
-            GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.Euler(transform.localEulerAngles));
+
+            GameObject BulletStart = transform.Find("Bullet Start").gameObject;
+            GameObject bullet = Instantiate(bulletPrefab, BulletStart.transform.position, Quaternion.Euler(transform.localEulerAngles));
 
             bullet.GetComponent<Rigidbody2D>().AddForce(forceDirection * forceAmount, ForceMode2D.Impulse);
 
