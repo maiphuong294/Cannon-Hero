@@ -4,10 +4,19 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public static Player instance { get; private set; }
     [SerializeField] private PlayerGun gun;
+    public static int Hit_Miss;
+    public static bool Moving;
+
+    private void Awake()
+    {
+        instance = this;
+    }
     void Start()
     {
-        
+        Hit_Miss = 0;
+        Moving = false;
     }
 
     // Update is called once per frame
@@ -23,5 +32,10 @@ public class Player : MonoBehaviour
             Debug.Log("GAMEOVER");
             gameObject.SetActive(false);
         }
+    }
+
+    public void ResetGun()
+    {
+        gun.ResetGun();
     }
 }

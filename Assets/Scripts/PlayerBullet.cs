@@ -63,7 +63,7 @@ public class PlayerBullet : MonoBehaviour
     {
         Debug.Log("gameOver");
         GameObject enemy = GameObject.Find("Enemy");
-        enemy.GetComponent<Enemy>().AimToPlayer();
+        if (enemy != null) enemy.GetComponent<Enemy>().AimToPlayer();
     }
 
    

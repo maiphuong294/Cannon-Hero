@@ -8,6 +8,7 @@ public class PlayerGun : MonoBehaviour
     // Start is called before the first frame update
     private Rigidbody2D rb;
     private bool isOnPress;
+    public bool isOnReset;
     private float rotationSpeed;
 
     [SerializeField] private Vector3 forceDirection;
@@ -17,6 +18,7 @@ public class PlayerGun : MonoBehaviour
     void Start()
     {
         isOnPress = false;
+        isOnReset = false;
         rotationSpeed = 30f;
         forceAmount = 10f;
         forceDirection = Vector3.up;
@@ -26,8 +28,16 @@ public class PlayerGun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if(Input.GetMouseButtonDown(0) == true)
+        if (isOnReset == true)
+        {
+            transform.Rotate(Vector3.back, rotationSpeed * 6f * Time.deltaTime);
+            if (transform.rotation.eulerAngles.z <= 1f)//de 0f thi quay mai khong dung????
+            {
+                isOnReset = false;
+            }
+            return;
+        }
+        if (Input.GetMouseButtonDown(0) == true)
         {
             isOnPress=true;          
         }
@@ -49,5 +59,11 @@ public class PlayerGun : MonoBehaviour
             bullet.GetComponent<Rigidbody2D>().AddForce(forceDirection * forceAmount, ForceMode2D.Impulse);
 
         }
+        
+    }
+
+    public void ResetGun()
+    {
+        isOnReset = true;
     }
 }

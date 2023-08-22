@@ -8,7 +8,7 @@ public class EnemyGun : MonoBehaviour
 {
     private Rigidbody2D rb;
 
-    [SerializeField] private GameObject Player;
+    //[SerializeField] private GameObject Player;
     [SerializeField] private GameObject bulletPrefab;
     public Vector3 directionToPlayer;
     public Vector3 forceDirection;
@@ -21,16 +21,13 @@ public class EnemyGun : MonoBehaviour
 
     private bool isAim;
 
-    int cnt;
-
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        Player = GameObject.Find("Player");//vi trong scene chi co 1 player
+        //Player = GameObject.Find("Player");//vi trong scene chi co 1 player
         directionToPlayer = Vector3.zero;
         forceDirection = Vector3.zero;
         forceAmount = 4f;
-        cnt = 0;
 
         rotationTime = 0.7f;
         rotationProgress = 0f;
@@ -59,12 +56,16 @@ public class EnemyGun : MonoBehaviour
 
     public void AimToPlayer()
     {
-        isAim = true;
-        //direction == velocity
-       
-        directionToPlayer = Player.transform.position - transform.position;
-        startRotation = transform.rotation;
-        Debug.Log("Aim To Player");
+        if(Player.instance != null)
+        {
+            isAim = true;
+            //direction == velocity
+
+            directionToPlayer = Player.instance.transform.position - transform.position;
+            startRotation = transform.rotation;
+            Debug.Log("Aim To Player");
+        }
+        
 
 
         
@@ -79,4 +80,6 @@ public class EnemyGun : MonoBehaviour
         bullet.GetComponent<Rigidbody2D>().AddForce(directionToPlayer * forceAmount, ForceMode2D.Impulse);
 
     }
+
+    
 }
