@@ -29,8 +29,12 @@ public class Player : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Bullet") == true)
         {
+
             Debug.Log("GAMEOVER");
-            gameObject.SetActive(false);
+            Destroy(gameObject);
+
+           
+            PlayerPrefs.SetInt("HighScore", Mathf.Max(ScoreManager.instance.currentScore, PlayerPrefs.GetInt("HighScore")));
         }
     }
 

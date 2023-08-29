@@ -57,13 +57,21 @@ public class PlayerBullet : MonoBehaviour
             gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
             GameOver();
         }
+
+        //ban vao head duoc them 1 diem
+        if (collision.gameObject.CompareTag("Head") == true)
+        {
+            ScoreManager.instance.currentScore++;
+            Debug.Log("HEADSHOT");
+            UIManager.instance.HeadShot();
+        }
     }
 
     public void GameOver()
     {
         Debug.Log("gameOver");
         GameObject enemy = GameObject.Find("Enemy");
-        if (enemy != null) enemy.GetComponent<Enemy>().AimToPlayer();
+        if (enemy != null && Player.instance != null) enemy.GetComponent<Enemy>().AimToPlayer();
     }
 
    

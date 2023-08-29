@@ -28,14 +28,19 @@ public class Enemy : MonoBehaviour
         if(collision.gameObject.CompareTag("Bullet") == true)
         {
             
-            gameObject.SetActive(false);
+            collision.gameObject.SetActive(false);
             Debug.Log("HIT");
-            Player.Hit_Miss = 1;
+            
             GameObject enemyAndBase = transform.parent.gameObject;
             Destroy(enemyAndBase);
-            collision.gameObject.SetActive(false);
+
+            Player.Hit_Miss = 1;
             Player.Moving = true;
             Player.instance.ResetGun();
+
+            ScoreManager.instance.currentScore++;
+
+
 
         }
     }
