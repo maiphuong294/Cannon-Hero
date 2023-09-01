@@ -10,6 +10,7 @@ TagManager:
   - Bullet
   - Undefined
   - Head
+  - Body
   layers:
   - Default
   - TransparentFX

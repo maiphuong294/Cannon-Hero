@@ -47,6 +47,24 @@ public class PlayerBullet : MonoBehaviour
             GameOver();
        
         }
+        if (collision.gameObject.CompareTag("Body") == true)
+        {
+            ScoreManager.instance.currentScore++;
+            Debug.Log("Hit but not headshot");
+            UIManager.instance.Hit();
+            collision.gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
+            return;
+
+        }
+        if (collision.gameObject.CompareTag("Head") == true)
+        {
+            ScoreManager.instance.currentScore += 2;
+            Debug.Log("HEADSHOT");
+            UIManager.instance.HeadShot();
+            collision.gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
+            
+        }
+        //bug hit sau do headshot
         
 
     }
@@ -59,12 +77,7 @@ public class PlayerBullet : MonoBehaviour
         }
 
         //ban vao head duoc them 1 diem
-        if (collision.gameObject.CompareTag("Head") == true)
-        {
-            ScoreManager.instance.currentScore++;
-            Debug.Log("HEADSHOT");
-            UIManager.instance.HeadShot();
-        }
+        
     }
 
     public void GameOver()
@@ -72,6 +85,7 @@ public class PlayerBullet : MonoBehaviour
         Debug.Log("gameOver");
         GameObject enemy = GameObject.Find("Enemy");
         if (enemy != null && Player.instance != null) enemy.GetComponent<Enemy>().AimToPlayer();
+        UIManager.instance.Miss();
     }
 
    

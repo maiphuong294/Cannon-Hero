@@ -4,12 +4,15 @@ using UnityEngine;
 using DG.Tweening;
 using System.Threading.Tasks;
 using UnityEngine.UI;
+using UnityEngine.Rendering;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager instance { get; private set; }
 
     [SerializeField] private GameObject HeadShotPopup;
+    [SerializeField] private GameObject MissPopup;
+    [SerializeField] private GameObject HitPopup;
     private void Awake()
     {
         instance = this; 
@@ -36,8 +39,23 @@ public class UIManager : MonoBehaviour
 
     }
 
-    IEnumerator Delay()
+    public async void Miss()
     {
-        yield return new WaitForSeconds(0.2f);
+        MissPopup.transform.DOScale(1f, 0.2f).SetEase(Ease.OutBack);
+        MissPopup.GetComponent<Image>().DOFade(1f, 0.2f);
+        await Task.Delay(1000);
+        MissPopup.transform.DOScale(0f, 0.2f).SetEase(Ease.InBack);
+        MissPopup.GetComponent<Image>().DOFade(0f, 0.2f);
+
     }
+
+    public async void Hit()
+    {
+        HitPopup.transform.DOScale(1f, 0.2f).SetEase(Ease.OutBack);
+        HitPopup.GetComponent<Image>().DOFade(1f, 0.2f);
+        await Task.Delay(1000);
+        HitPopup.transform.DOScale(0f, 0.2f).SetEase(Ease.InBack);
+        HitPopup.GetComponent<Image>().DOFade(0f, 0.2f);
+    }
+
 }

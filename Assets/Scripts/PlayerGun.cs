@@ -31,7 +31,7 @@ public class PlayerGun : MonoBehaviour
         if (isOnReset == true)
         {
             transform.Rotate(Vector3.back, rotationSpeed * 6f * Time.deltaTime);
-            if (transform.rotation.eulerAngles.z <= 1f)//de 0f thi quay mai khong dung????
+            if (transform.rotation.eulerAngles.z <= 1.5f)//de 0f thi quay mai khong dung????
             {
                 isOnReset = false;
             }
