@@ -39,7 +39,6 @@ public class EnemyGun : MonoBehaviour
     {
         if(rotationProgress < 1 && isAim == true)
         {
-            Debug.Log("Aim" + Time.frameCount);
             rotationProgress += Time.deltaTime / rotationTime;
             rotationProgress = Mathf.Clamp01(rotationProgress);
 

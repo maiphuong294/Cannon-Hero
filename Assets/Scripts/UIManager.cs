@@ -5,6 +5,7 @@ using DG.Tweening;
 using System.Threading.Tasks;
 using UnityEngine.UI;
 using UnityEngine.Rendering;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject HeadShotPopup;
     [SerializeField] private GameObject MissPopup;
     [SerializeField] private GameObject HitPopup;
+    [SerializeField] private GameObject CoinText;
+    [SerializeField] private TextMeshProUGUI coinText;
     private void Awake()
     {
         instance = this; 
@@ -20,7 +23,8 @@ public class UIManager : MonoBehaviour
  
     void Start()
     {
-
+        coinText = CoinText.GetComponent<TextMeshProUGUI>();
+        UpdateCoin();
     }
 
     // Update is called once per frame
@@ -56,6 +60,10 @@ public class UIManager : MonoBehaviour
         await Task.Delay(1000);
         HitPopup.transform.DOScale(0f, 0.2f).SetEase(Ease.InBack);
         HitPopup.GetComponent<Image>().DOFade(0f, 0.2f);
+    }
+
+    public void UpdateCoin() {
+        coinText.SetText(PlayerPrefs.GetInt("Coins").ToString());
     }
 
 }

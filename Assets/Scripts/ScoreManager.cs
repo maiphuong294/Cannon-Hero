@@ -13,6 +13,7 @@ public class ScoreManager : MonoBehaviour
     }
     void Start()
     {
+   
         currentScore = 0;
     }
 

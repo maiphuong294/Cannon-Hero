@@ -6,6 +6,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private EnemyGun gun;
+    [SerializeField] public GameObject coinPrefab;
    
     void Start()
     {
@@ -37,6 +38,16 @@ public class Enemy : MonoBehaviour
             Player.Hit_Miss = 1;
             Player.Moving = true;
             Player.instance.ResetGun();
+
+            int t = Random.Range(3, 5);
+            int a = PlayerPrefs.GetInt("Coins");
+            PlayerPrefs.SetInt("Coins", a + t);
+            while (t-->0)
+            {
+                Instantiate(coinPrefab, gameObject.transform.position, Quaternion.identity);
+            }
+            UIManager.instance.UpdateCoin();
+
 
             ScoreManager.instance.currentScore++;
 

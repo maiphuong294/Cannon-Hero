@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.EventSystems;
 
 public class PlayerGun : MonoBehaviour
 {
@@ -37,7 +38,7 @@ public class PlayerGun : MonoBehaviour
             }
             return;
         }
-        if (Input.GetMouseButtonDown(0) == true)
+        if (Input.GetMouseButtonDown(0) == true && !IsOverUI())
         {
             isOnPress=true;          
         }
@@ -46,7 +47,7 @@ public class PlayerGun : MonoBehaviour
             //transform.Rotate(1.0f, 0.0f, 0.0f, Space.Self);
             transform.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
         }
-        if(Input.GetMouseButtonUp(0) == true)
+        if(Input.GetMouseButtonUp(0) == true && !IsOverUI())
         {
             //chuyen tu rotation.euler -> direction theo chieu x, y
             forceDirection.x = (float)Math.Cos(transform.rotation.eulerAngles.z * 0.0174532925);
@@ -65,5 +66,13 @@ public class PlayerGun : MonoBehaviour
     public void ResetGun()
     {
         isOnReset = true;
+    }
+    public static bool IsOverUI()
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        return results.Count > 0;
     }
 }
