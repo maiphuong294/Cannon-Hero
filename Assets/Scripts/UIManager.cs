@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject HitPopup;
     [SerializeField] private GameObject CoinText;
     [SerializeField] private TextMeshProUGUI coinText;
+    [SerializeField] private GameObject MenuPanel;
     private void Awake()
     {
         instance = this; 
@@ -60,6 +61,13 @@ public class UIManager : MonoBehaviour
         await Task.Delay(1000);
         HitPopup.transform.DOScale(0f, 0.2f).SetEase(Ease.InBack);
         HitPopup.GetComponent<Image>().DOFade(0f, 0.2f);
+    }
+
+    public void CloseMenu()
+    {      
+    
+        MenuPanel.transform.DOMoveY(-20f, 0.2f).SetEase(Ease.OutBack);
+        
     }
 
     public void UpdateCoin() {
