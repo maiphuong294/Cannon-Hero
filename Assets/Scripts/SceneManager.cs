@@ -15,7 +15,7 @@ public class SceneManager : MonoBehaviour
     public static Scene currentScene;
     void Start()
     {
-        currentScene = Scene.Menu;
+        currentScene = Scene.Play;
     }
 
     // Update is called once per frame

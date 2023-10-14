@@ -86,6 +86,8 @@ public class PlayerBullet : MonoBehaviour
         GameObject enemy = GameObject.Find("Enemy");
         if (enemy != null && Player.instance != null) enemy.GetComponent<Enemy>().AimToPlayer();
         UIManager.instance.Miss();
+
+        
     }
 
    

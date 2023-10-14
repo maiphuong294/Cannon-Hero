@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using UnityEngine.UI;
 using UnityEngine.Rendering;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject CoinText;
     [SerializeField] private TextMeshProUGUI coinText;
     [SerializeField] private GameObject MenuPanel;
+
+    private GameObject RePlayButton;
     private void Awake()
     {
         instance = this; 
@@ -26,6 +29,8 @@ public class UIManager : MonoBehaviour
     {
         coinText = CoinText.GetComponent<TextMeshProUGUI>();
         UpdateCoin();
+
+        RePlayButton = GameObject.Find("Play Again Button");
     }
 
     // Update is called once per frame
@@ -72,6 +77,15 @@ public class UIManager : MonoBehaviour
 
     public void UpdateCoin() {
         coinText.SetText(PlayerPrefs.GetInt("Coins").ToString());
+    }
+
+    public void RePlayButtonActive()
+    {     
+        RePlayButton.SetActive(true);
+    }
+    public void ReStart()
+    {
+        RePlayButton.SetActive(false);      
     }
 
 }

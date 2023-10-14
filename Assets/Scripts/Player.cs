@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -41,5 +43,10 @@ public class Player : MonoBehaviour
     public void ResetGun()
     {
         gun.ResetGun();
+    }
+
+    public void ReloadPlayScene()
+    {
+        //SceneManager.LoadScene("PlayScene");
     }
 }
