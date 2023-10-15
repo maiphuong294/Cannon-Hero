@@ -29,7 +29,7 @@ public class PlayerGun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (SceneManager.currentScene != Scene.Play) return;
+        if (SceneController.currentScene != Scene.Play) return;
         if (isOnReset == true)
         {
             transform.Rotate(Vector3.back, rotationSpeed * 6f * Time.deltaTime);

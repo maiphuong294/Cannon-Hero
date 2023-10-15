@@ -14,9 +14,9 @@ public class MenuPanel : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonUp(0) == true && SceneManager.currentScene == Scene.Menu) 
+        if (Input.GetMouseButtonUp(0) == true && SceneController.currentScene == Scene.Menu) 
         {
-            Debug.Log("StartPlaye");
+            Debug.Log("StartPlay");
             StartCoroutine("ChangeState");
             UIManager.instance.CloseMenu();
         }
@@ -25,7 +25,7 @@ public class MenuPanel : MonoBehaviour
     IEnumerator ChangeState()
     {
         yield return new WaitForSeconds(0.2f);
-        SceneManager.currentScene = Scene.Play;
+        SceneController.currentScene = Scene.Play;
         gameObject.SetActive(false);
     }
 

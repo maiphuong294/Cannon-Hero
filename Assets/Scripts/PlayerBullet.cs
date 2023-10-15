@@ -11,8 +11,11 @@ public class PlayerBullet : MonoBehaviour
     private float veloMin;
 
     [SerializeField] private GameObject whiteTrailPrefab;
+    [SerializeField] private GameObject GameOverPanel;
+    [SerializeField] private GameObject Canvas;
     void Start()
     {
+        Canvas = GameObject.Find("Canvas");
         rb = GetComponent<Rigidbody2D>();
         direction = Vector3.up;
         velo = Vector3.up;
@@ -37,15 +40,22 @@ public class PlayerBullet : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy") == true){
-            Debug.Log("HIT");
-        }
         if(collision.gameObject.CompareTag("Ground") == true)
         {
             Debug.Log("Hit the ground");
             gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
             GameOver();
        
+        }
+        
+        if (collision.gameObject.CompareTag("Head") == true)
+        {
+            ScoreManager.instance.currentScore += 2;
+            Debug.Log("HEADSHOT");
+            UIManager.instance.HeadShot();
+            collision.gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
+            return;
+            
         }
         if (collision.gameObject.CompareTag("Body") == true)
         {
@@ -56,16 +66,8 @@ public class PlayerBullet : MonoBehaviour
             return;
 
         }
-        if (collision.gameObject.CompareTag("Head") == true)
-        {
-            ScoreManager.instance.currentScore += 2;
-            Debug.Log("HEADSHOT");
-            UIManager.instance.HeadShot();
-            collision.gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
-            
-        }
         //bug hit sau do headshot
-        
+
 
     }
     public void OnTriggerEnter2D(Collider2D collision)
@@ -86,7 +88,9 @@ public class PlayerBullet : MonoBehaviour
         GameObject enemy = GameObject.Find("Enemy");
         if (enemy != null && Player.instance != null) enemy.GetComponent<Enemy>().AimToPlayer();
         UIManager.instance.Miss();
-
+        GameOverPanel = Canvas.transform.Find("GameOver Panel").gameObject;
+        GameOverPanel.SetActive(true);
+      
         
     }
 
