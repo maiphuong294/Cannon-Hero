@@ -63,6 +63,8 @@ public class PlayerBullet : MonoBehaviour
             Debug.Log("Hit but not headshot");
             UIManager.instance.Hit();
             collision.gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
+            collision.gameObject.transform.GetChild(0).GetComponent<BoxCollider2D>().isTrigger = true;
+
             return;
 
         }

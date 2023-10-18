@@ -31,5 +31,9 @@ public class Trail : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        if(Player.Moving == true)
+        {
+            transform.Translate(Vector2.left * Time.deltaTime);
+        }
     }
 }

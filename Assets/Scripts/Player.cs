@@ -21,11 +21,6 @@ public class Player : MonoBehaviour
         Moving = false;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void OnCollisionEnter2D(Collision2D collision)
     {

@@ -20,7 +20,7 @@ public class SceneController : MonoBehaviour
     void Start()
     {
         currentScene = Scene.Menu;
-
+        Application.targetFrameRate = 60;
 
     }
 

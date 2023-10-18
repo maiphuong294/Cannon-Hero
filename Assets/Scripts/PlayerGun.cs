@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.EventSystems;
+using DG.Tweening;
 
 public class PlayerGun : MonoBehaviour
 {
@@ -32,11 +33,8 @@ public class PlayerGun : MonoBehaviour
         if (SceneController.currentScene != Scene.Play) return;
         if (isOnReset == true)
         {
-            transform.Rotate(Vector3.back, rotationSpeed * 6f * Time.deltaTime);
-            if (transform.rotation.eulerAngles.z <= 1.5f)//de 0f thi quay mai khong dung????
-            {
-                isOnReset = false;
-            }
+            transform.DORotate(new Vector3(0, 0, 360), 0.5f);
+            isOnReset=false;
             return;
         }
         if (Input.GetMouseButtonDown(0) == true && !IsOverUI())
